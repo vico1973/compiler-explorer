@@ -33,7 +33,8 @@ require('bootstrap-slider');
 var sharing = require('./sharing');
 var _ = require('underscore');
 var $ = require('jquery');
-var GoldenLayout = require('golden-layout');
+import GoldenLayout from 'golden-layout';
+
 var Components = require('./components');
 var url = require('./url');
 var clipboard = require('clipboard');
@@ -46,8 +47,16 @@ var themer = require('./themes');
 var motd = require('./motd');
 var jsCookie = require('js-cookie');
 var SimpleCook = require('./simplecook');
-var History = require('./history');
+var CeHistory = require('./history');
 var HistoryWidget = require('./history-widget').HistoryWidget;
+
+declare global {
+    interface Window {
+        httpRoot: string;
+        compilerExplorerOptions: any; // TODO better type
+        // TODO: any->object throughout?
+    }
+}
 
 //css
 require("bootstrap/dist/css/bootstrap.min.css");
@@ -65,23 +74,25 @@ var historyWidget = new HistoryWidget();
 
 // Polyfill includes for IE11 - From MDN
 if (!String.prototype.includes) {
-    String.prototype.includes = function (search, start) {
+    String.prototype.includes = function (search: any, start) {
         if (search instanceof RegExp) {
             throw TypeError('first argument must not be a RegExp');
         }
-        if (start === undefined) { start = 0; }
+        if (start === undefined) {
+            start = 0;
+        }
         return this.indexOf(search, start) !== -1;
     };
 }
 
-function setupSettings(hub) {
+function setupSettings(hub: any) {
     var eventHub = hub.layout.eventHub;
     var defaultSettings = {
         defaultLanguage: hub.defaultLangId
     };
     var currentSettings = JSON.parse(local.get('settings', null)) || defaultSettings;
 
-    function onChange(newSettings) {
+    function onChange(newSettings: any) {
         if (currentSettings.theme !== newSettings.theme) {
             analytics.proxy('send', {
                 hitType: 'event',
@@ -108,23 +119,23 @@ function setupSettings(hub) {
     });
 
     var setSettings = settings($('#settings'), currentSettings, onChange, hub.subdomainLangId);
-    eventHub.on('modifySettings', function (newSettings) {
+    eventHub.on('modifySettings', function (newSettings: any) {
         setSettings(_.extend(currentSettings, newSettings));
     });
     return currentSettings;
 }
 
-function hasCookieConsented(options) {
+function hasCookieConsented(options: any) {
     return jsCookie.get(options.policies.cookies.key) === options.policies.cookies.hash;
 }
 
-function setupButtons(options) {
+function setupButtons(options: any) {
     var alertSystem = new Alert();
 
     // I'd like for this to be the only function used, but it gets messy to pass the callback function around,
     // so we instead trigger a click here when we want it to open with this effect. Sorry!
     if (options.policies.privacy.enabled) {
-        $('#privacy').click(function (event, data) {
+        $('#privacy').click(function (event: Event, data: any) {
             alertSystem.alert(
                 data && data.title ? data.title : "Privacy policy",
                 require('./policies/privacy.html')
@@ -175,7 +186,7 @@ function setupButtons(options) {
     });
 
     $('#ui-history').click(function () {
-        historyWidget.run(function (data) {
+        historyWidget.run(function (data: any) {
             local.set('gl', JSON.stringify(data.config));
             hasUIBeenReset = true;
             window.history.replaceState(null, null, window.httpRoot);
@@ -186,7 +197,7 @@ function setupButtons(options) {
     });
 }
 
-function findConfig(defaultConfig, options) {
+function findConfig(defaultConfig:any, options:any) {
     var config = null;
     if (!options.embedded) {
         if (options.config) {
@@ -225,7 +236,7 @@ function initializeResetLayoutLink() {
     }
 }
 
-function initPolicies(options) {
+function initPolicies(options:any) {
     // Ensure old cookies are removed, to avoid user confusion
 
     jsCookie.remove('fs_uid');
@@ -268,7 +279,7 @@ function start() {
     // Only set the subdomain lang id if it makes sense to do so
     if (hostnameParts.length > 0) {
         var subdomainPart = hostnameParts[0];
-        var langBySubdomain = _.find(options.languages, function (lang) {
+        var langBySubdomain = _.find(options.languages, function (lang:any) {
             return lang.id === subdomainPart || lang.alias.indexOf(subdomainPart) !== -1;
         });
         if (langBySubdomain) {
@@ -288,7 +299,7 @@ function start() {
     // way that works across multiple domains (e.g. godbolt.org and compiler-explorer.com).
     // We allow this to be configurable so that (for example), gcc.godbolt.org and d.godbolt.org
     // share the same cookie domain for some settings.
-    var cookieDomain = new RegExp(options.cookieDomainRe).exec(window.location.hostname);
+    var cookieDomain = new RegExp(options.cookieDomainRe).exec(window.location.hostname).toString();
     if (cookieDomain && cookieDomain[0]) {
         cookieDomain = cookieDomain[0];
         jsCookie.defaults.domain = cookieDomain;
@@ -321,8 +332,8 @@ function start() {
 
     var root = $("#root");
 
-    var layout;
-    var hub;
+    var layout: GoldenLayout;
+    var hub: any;
     try {
         layout = new GoldenLayout(config, root);
         hub = new Hub(layout, subLangId, defaultLangId);
@@ -330,15 +341,15 @@ function start() {
         Sentry.captureException(e);
 
         if (document.URL.includes("/z/")) {
-            document.location = document.URL.replace("/z/", "/resetlayout/");
+            document.location.replace(document.URL.replace("/z/", "/resetlayout/"));
         }
 
         layout = new GoldenLayout(defaultConfig, root);
         hub = new Hub(layout, subLangId, defaultLangId);
     }
 
-    var lastState = null;
-    var storedPaths = {};  // TODO maybe make this an LRU cache?
+    var lastState: any = null;
+    var storedPaths: any = {};  // TODO maybe make this an LRU cache?
 
     layout.on('stateChanged', function () {
         var config = layout.toConfig();
@@ -352,7 +363,7 @@ function start() {
             }
             lastState = stringifiedConfig;
 
-            History.push(stringifiedConfig);
+            CeHistory.push(stringifiedConfig);
         }
         if (options.embedded) {
             var strippedToLast = window.location.pathname;
@@ -385,12 +396,12 @@ function start() {
         setupButtons(options);
     }
 
-    sharing.initShareButton($('#share'), layout, function (config, extra) {
+    sharing.initShareButton($('#share'), layout, function (config: any, extra: any) {
         window.history.pushState(null, null, extra);
         storedPaths[JSON.stringify(config)] = extra;
     });
 
-    function setupAdd(thing, func) {
+    function setupAdd(thing: any, func: any) {
         layout.createDragSource(thing, func);
         thing.click(function () {
             hub.addAtRoot(func());
@@ -414,7 +425,7 @@ function start() {
     if (!options.embedded) {
         // Only fetch MOTD when not embedded.
         motd.initialise(options.motdUrl, $('#motd'), subLangId, settings.enableCommunityAds,
-            function (data) {
+            function (data: any) {
                 var sendMotd = function () {
                     hub.layout.eventHub.emit('motd', data);
                 };

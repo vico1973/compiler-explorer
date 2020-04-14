@@ -7,7 +7,7 @@
     optimize: "uglify2",
     removeCombined: true,
     useStrict: true,
-    mainConfigFile: "static/main.js",
+    mainConfigFile: "static/main.ts",
     skipDirOptimize: true,
     optimizeCss: "standard",
     paths: { "vs": "empty:" },

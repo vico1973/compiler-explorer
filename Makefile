@@ -9,6 +9,7 @@ export SENTRY_ORG := compiler-explorer
 # If you see "node-not-found" then you need to depend on node-installed.
 NODE:=node-not-found
 NPM:=npm-not-found
+NODE_ARGS=-max_old_space_size=16384
 
 # These 'find' scripts cache their results in a dotfile.
 # Doing it this way instead of NODE:=$(shell etc/script/find-node) means

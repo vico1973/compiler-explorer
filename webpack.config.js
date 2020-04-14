@@ -38,13 +38,15 @@ let plugins = [
 
 module.exports = {
     mode: isDev ? 'development' : 'production',
-    entry: './static/main.js',
+    entry: './static/main.ts',
+    devtool: 'inline-source-map',
     output: {
         filename: isDev ? '[name].js' : '[name].[chunkhash].js',
         path: staticPath
     },
     resolve: {
-        modules: ['./static', './node_modules']
+        modules: ['./static', './node_modules'],
+        extensions: ['.tsx', '.ts', '.js']
     },
     stats: 'normal',
     devtool: 'source-map',
@@ -91,6 +93,11 @@ module.exports = {
                 options: {
                     minimize: !isDev
                 }
+            },
+            {
+                test: /\.tsx?$/,
+                use: 'ts-loader',
+                exclude: /node_modules/
             }
         ]
     },
