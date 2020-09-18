@@ -116,63 +116,104 @@ LibsWidget.prototype.lazyDropdownLoad = function () {
         var currentColumnItemCount = 0;
         var libsKeys = _.keys(this.availableLibs[this.currentLangId][this.currentCompilerId]).sort();
         var itemsPerColumn = Math.floor(libsKeys.length / MAX_COLUMNS);
-        this.domRoot = $('<div></div>');
-        var libsPanel = $('<div></div>')
-            .addClass('card-columns');
-        var getOrCreateNextColumn = function () {
-            if (currentColumn === null || currentColumnItemCount >= itemsPerColumn) {
-                currentColumn = $('<div></div>').addClass('card');
-                libsPanel.append(currentColumn);
-                currentColumnItemCount = 0;
-            }
-            return currentColumn;
-        };
-        var addLibCardToColumn = function (libCard) {
-            var column = getOrCreateNextColumn();
-            column.append(libCard);
-            currentColumnItemCount++;
-        };
-        var libsInUse = this.listUsedLibs();
-
+        this.domRoot = $('<div style="width:400px;"><select class="compiler-list" multiple placeholder="Select libraries..."></select></div>');
+        var items = [];
+        var groups = [];
         _.each(libsKeys, _.bind(function (id) {
             var libEntry = this.availableLibs[this.currentLangId][this.currentCompilerId][id];
+            groups.push({value: libEntry.name, label: libEntry.name});
             if (libEntry.versions.autodetect) return;
-
-            var newLibCard = this.libsEntry.clone();
-            var label = newLibCard.find('.input-group-prepend label')
-                .text(libEntry.name)
-                .prop('title', libEntry.description || '')
-                .prop('for', id);
-            var select = newLibCard.find('select')
-                .prop('id', id)
-                .append($('<option>', {
-                    value: '-',
-                    text: '-',
-                }));
-            _.each(libEntry.versions, _.bind(function (version, versionId) {
-                select.append($('<option>', {
-                    value: versionId,
-                    text: version.version,
-                    selected: libsInUse[id] && libsInUse[id] === versionId,
-                }));
+            console.log(libEntry);
+            _.each(libEntry.versions, _.bind(function (version) {
+                items.push({library: libEntry.name, name: version.version});
             }, this));
-            label.toggleClass('bg-success text-white', select.val() !== '-');
-            select.on('change', _.bind(function () {
-                var newVal = select.val();
-                label.toggleClass('bg-success text-white', newVal !== '-');
-                // Disable every version for this lib
-                _.each(libEntry.versions, _.bind(function (version, verId) {
-                    this.markLibrary(id, verId, false);
-                }, this));
-                if (newVal !== '-') {
-                    this.markLibrary(id, newVal, true);
-                }
-                this.onChangeCallback();
-            }, this));
-            addLibCardToColumn(newLibCard);
         }, this));
-        this.domRoot.append(libsPanel);
-        return this.domRoot;
+
+        this.domRoot.find('select').selectize({
+            delimiter: ',',
+            create: false,
+            plugins: ['remove_button'],
+            sortField: 'name',
+            valueField: 'name',
+            labelField: 'name',
+            searchField: ['library', 'name'],
+            optgroupField: 'library',
+            optgroups: groups,
+            lockOptgroupOrder: true,
+            hideSelected: false,
+            options: items,
+            items: [], // todo current selections
+            dropdownParent: 'body',
+            render: {
+                item: function (item, escape) {
+                    return '<div>' + escape(item.library + ' ' + item.name) + '</div>';
+                },
+            },
+        }).on('change', _.bind(function (e) {
+            // var val = $(e.target).val();
+            // if (val) {
+            //     ga.proxy('send', {
+            //         hitType: 'event',
+            //         eventCategory: 'SelectCompiler',
+            //         eventAction: val,
+            //     });
+            //     this.onCompilerChange(val);
+            // }
+        }, this));
+        // var libsPanel = $('<div></div>')
+        //     .addClass('card-columns');
+        // var getOrCreateNextColumn = function () {
+        //     if (currentColumn === null || currentColumnItemCount >= itemsPerColumn) {
+        //         currentColumn = $('<div></div>').addClass('card');
+        //         libsPanel.append(currentColumn);
+        //         currentColumnItemCount = 0;
+        //     }
+        //     return currentColumn;
+        // };
+        // var addLibCardToColumn = function (libCard) {
+        //     var column = getOrCreateNextColumn();
+        //     column.append(libCard);
+        //     currentColumnItemCount++;
+        // };
+        // var libsInUse = this.listUsedLibs();
+        //
+        // _.each(libsKeys, _.bind(function (id) {
+        //     var libEntry = this.availableLibs[this.currentLangId][this.currentCompilerId][id];
+        //     if (libEntry.versions.autodetect) return;
+        //
+        //     var newLibCard = this.libsEntry.clone();
+        //     var label = newLibCard.find('.input-group-prepend label')
+        //         .text(libEntry.name)
+        //         .prop('title', libEntry.description || '')
+        //         .prop('for', id);
+        //     var select = newLibCard.find('select')
+        //         .prop('id', id)
+        //         .append($('<option>', {
+        //             value: '-',
+        //             text: '-',
+        //         }));
+        //     _.each(libEntry.versions, _.bind(function (version, versionId) {
+        //         select.append($('<option>', {
+        //             value: versionId,
+        //             text: version.version,
+        //             selected: libsInUse[id] && libsInUse[id] === versionId,
+        //         }));
+        //     }, this));
+        //     label.toggleClass('bg-success text-white', select.val() !== '-');
+        //     select.on('change', _.bind(function () {
+        //         var newVal = select.val();
+        //         label.toggleClass('bg-success text-white', newVal !== '-');
+        //         // Disable every version for this lib
+        //         _.each(libEntry.versions, _.bind(function (version, verId) {
+        //             this.markLibrary(id, verId, false);
+        //         }, this));
+        //         if (newVal !== '-') {
+        //             this.markLibrary(id, newVal, true);
+        //         }
+        //         this.onChangeCallback();
+        //     }, this));
+        //     addLibCardToColumn(newLibCard);
+        // }, this));
     }
     return this.domRoot;
 };
