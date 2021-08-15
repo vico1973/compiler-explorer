@@ -94,6 +94,7 @@ const opts = nopt({
     suppressConsoleLog: [Boolean],
     metricsPort: [Number],
     loki: [String],
+    enablePropArrays: [Boolean],
 });
 
 if (opts.debug) logger.level = 'debug';
@@ -159,6 +160,7 @@ const defArgs = {
     fetchCompilersFromRemote: !opts.noRemoteFetch,
     ensureNoCompilerClash: opts.ensureNoIdClash,
     suppressConsoleLog: opts.suppressConsoleLog || false,
+    enablePropArrays: opts.enablePropArrays,
 };
 
 if (opts.logHost && opts.logPort) {
@@ -187,6 +189,7 @@ logger.info(`properties hierarchy: ${propHierarchy.join(', ')}`);
 
 // Propagate debug mode if need be
 if (opts.propDebug) props.setDebug(true);
+if (defArgs.enablePropArrays) props.setArraySupport(true);
 
 // *All* files in config dir are parsed
 const configDir = path.join(defArgs.rootDir, 'config');
