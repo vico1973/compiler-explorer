@@ -1,3 +1,4 @@
+// eslint-disable-next-line unicorn/prefer-module
 module.exports = {
     root: true,
     plugins: [
@@ -8,6 +9,7 @@ module.exports = {
         'sonarjs',
         'unicorn',
         '@typescript-eslint',
+        'eslint-plugin-header',
     ],
     extends: [
         'eslint:recommended',
@@ -17,7 +19,6 @@ module.exports = {
         'plugin:unicorn/recommended',
         'plugin:@typescript-eslint/eslint-recommended',
         'plugin:@typescript-eslint/recommended',
-        'eslint-plugin-header',
         'prettier',
     ],
     env: {
@@ -58,11 +59,11 @@ module.exports = {
         'no-useless-rename': 'error',
         'no-useless-return': 'error',
         'quote-props': ['error', 'as-needed'],
-        'quotes': ['error', 'single', {allowTemplateLiterals: true, avoidEscape: true}],
-        'semi': ['error', 'always'],
+        quotes: ['error', 'single', {allowTemplateLiterals: true, avoidEscape: true}],
+        semi: ['error', 'always'],
         'space-before-function-paren': ['error', {anonymous: 'always', asyncArrow: 'always', named: 'never'}],
         'keyword-spacing': ['error', {after: true}],
-        'yoda': ['error', 'never', {onlyEquality: true}],
+        yoda: ['error', 'never', {onlyEquality: true}],
         'no-multiple-empty-lines': ['warn', {max: 1, maxBOF: 0, maxEOF: 0}],
         'no-process-exit': 'off',
         'sort-imports': ['warn', {ignoreCase: true, ignoreDeclarationSort: true}],
@@ -83,9 +84,9 @@ module.exports = {
         'import/order': [
             'warn',
             {
-                'alphabetize': {
-                    'order': 'asc',
-                    'caseInsensitive': true,
+                alphabetize: {
+                    order: 'asc',
+                    caseInsensitive: true,
                 },
                 'newlines-between': 'always',
             },
@@ -152,8 +153,8 @@ module.exports = {
             'line',
             [
                 {
-                    'pattern': '^ Copyright \\(c\\) \\d{4}, .*$',
-                    'template': ' Copyright (c) 2021, Compiler Explorer Authors',
+                    pattern: '^ Copyright \\(c\\) \\d{4}, .*$',
+                    template: ' Copyright (c) 2021, Compiler Explorer Authors',
                 },
                 ' All rights reserved.',
                 '',
