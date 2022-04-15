@@ -4,7 +4,6 @@ plugins:
   - sonarjs
   - unicorn
 extends:
-  - ../.eslint-license-header.yml
   - eslint:recommended
 env:
   browser: true
