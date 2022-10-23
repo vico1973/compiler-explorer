@@ -84,31 +84,27 @@ export class InstructionSets {
         };
     }
 
-    async getCompilerInstructionSetHint(compilerArch: string | boolean, exe: string): Promise<string> {
-        return new Promise(resolve => {
-            if (compilerArch && typeof compilerArch === 'string') {
-                for (const instructionSet in this.supported) {
-                    const method = this.supported[instructionSet];
-                    for (const target of method.target) {
-                        if (compilerArch.includes(target)) {
-                            resolve(instructionSet);
-                            return;
-                        }
-                    }
-                }
-            } else {
-                for (const instructionSet in this.supported) {
-                    const method = this.supported[instructionSet];
-                    for (const path of method.path) {
-                        if (exe.includes(path)) {
-                            resolve(instructionSet);
-                            return;
-                        }
+    getCompilerInstructionSetHint(compilerArch: string | boolean, exe: string) {
+        if (compilerArch && typeof compilerArch === 'string') {
+            for (const instructionSet in this.supported) {
+                const method = this.supported[instructionSet];
+                for (const target of method.target) {
+                    if (compilerArch.includes(target)) {
+                        return instructionSet;
                     }
                 }
             }
+        } else {
+            for (const instructionSet in this.supported) {
+                const method = this.supported[instructionSet];
+                for (const path of method.path) {
+                    if (exe.includes(path)) {
+                        return instructionSet;
+                    }
+                }
+            }
+        }
 
-            resolve(this.defaultInstructionset);
-        });
+        return this.defaultInstructionset;
     }
 }

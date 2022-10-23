@@ -30,7 +30,7 @@ describe('InstructionSets', async () => {
 
         return isets
             .getCompilerInstructionSetHint('aarch64-linux-gnu', '/opt/compiler-explorer/clang-11.0.1/bin/clang++')
-            .should.eventually.equal('aarch64');
+            .should.equal('aarch64');
     });
 
     it('should recognize gcc aarch64 from filepath', async () => {
@@ -41,7 +41,7 @@ describe('InstructionSets', async () => {
                 false,
                 '/opt/compiler-explorer/arm64/gcc-12.1.0/aarch64-unknown-linux-gnu/bin/aarch64-unknown-linux-gnu-g++',
             )
-            .should.eventually.equal('aarch64');
+            .should.equal('aarch64');
     });
 
     it('should default to amd64 when not apparant', async () => {
@@ -49,6 +49,6 @@ describe('InstructionSets', async () => {
 
         return isets
             .getCompilerInstructionSetHint(false, '/opt/compiler-explorer/gcc-12.2.0/bin/g++')
-            .should.eventually.equal('amd64');
+            .should.equal('amd64');
     });
 });
