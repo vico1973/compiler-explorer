@@ -28,7 +28,7 @@ import fs from 'fs-extra';
 import LRU from 'lru-cache';
 
 import {GetResult} from '../../types/cache.interfaces';
-import {logger} from '../logger';
+import {logger} from './../logger.js';
 
 import {BaseCache} from './base';
 

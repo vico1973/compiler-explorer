@@ -27,7 +27,7 @@ import path from 'path';
 
 import _ from 'underscore';
 
-import {logger} from './logger';
+import {logger} from './logger.js';
 import {PropertyGetter, PropertyValue, Widen} from './properties.interfaces';
 import {toProperty} from './utils';
 

@@ -23,7 +23,7 @@
 // POSSIBILITY OF SUCH DAMAGE.
 
 import {AssemblyInstructionInfo, BaseAssemblyDocumentationProvider} from './base';
-import {getAsmOpcode} from './generated/asm-docs-llvm';
+import {getAsmOpcode} from './generated/asm-docs-llvm.js';
 
 export class LLVMDocumentationProvider extends BaseAssemblyDocumentationProvider {
     public static get key() {

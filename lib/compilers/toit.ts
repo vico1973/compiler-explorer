@@ -27,7 +27,7 @@ import _ from 'underscore';
 import {ParseFiltersAndOutputOptions} from '../../types/features/filters.interfaces';
 import {BaseCompiler} from '../base-compiler';
 
-import {ToitParser} from './argument-parsers';
+import {ToitParser} from './argument-parsers.js';
 
 export class ToitCompiler extends BaseCompiler {
     static get key() {

@@ -34,9 +34,9 @@ import _ from 'underscore';
 import which from 'which';
 
 import {BaseCompiler} from '../base-compiler';
-import {CompilationEnvironment} from '../compilation-env';
-import {getCompilerTypeByKey} from '../compilers';
-import {logger} from '../logger';
+import {CompilationEnvironment} from './../compilation-env.js';
+import {getCompilerTypeByKey} from './../compilers/index.js';
+import {logger} from './../logger.js';
 import * as utils from '../utils';
 
 import {

@@ -30,8 +30,8 @@ import _ from 'underscore';
 import {ExecutionOptions} from '../../types/compilation/compilation.interfaces';
 import {UnprocessedExecResult} from '../../types/execution/execution.interfaces';
 import {BaseCompiler} from '../base-compiler';
-import {AmdgpuAsmParser} from '../parsers/asm-parser-amdgpu';
-import {SassAsmParser} from '../parsers/asm-parser-sass';
+import {AmdgpuAsmParser} from './../parsers/asm-parser-amdgpu.js';
+import {SassAsmParser} from './../parsers/asm-parser-sass.js';
 
 const offloadRegexp = /^#\s+__CLANG_OFFLOAD_BUNDLE__(__START__|__END__)\s+(.*)$/gm;
 

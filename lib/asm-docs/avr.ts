@@ -23,7 +23,7 @@
 // POSSIBILITY OF SUCH DAMAGE.
 
 import {AssemblyInstructionInfo, BaseAssemblyDocumentationProvider} from './base';
-import {getAsmOpcode} from './generated/asm-docs-avr';
+import {getAsmOpcode} from './generated/asm-docs-avr.js';
 
 export class AvrDocumentationProvider extends BaseAssemblyDocumentationProvider {
     public static get key() {

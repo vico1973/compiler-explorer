@@ -13,5 +13,9 @@
     "typeRoots": ["./typings", "./node_modules/@types"],
     /* Other options */
     "allowJs": true
+  },
+  "ts-node": {
+    "esm": true,
+    "experimentalSpecifierResolution": "node"
   }
 }

@@ -29,8 +29,8 @@ import fs from 'fs-extra';
 import {ExecutionOptions} from '../../types/compilation/compilation.interfaces';
 import {ParseFiltersAndOutputOptions} from '../../types/features/filters.interfaces';
 import {BaseCompiler} from '../base-compiler';
-import {logger} from '../logger';
-import {AsmParserZ88dk} from '../parsers/asm-parser-z88dk';
+import {logger} from './../logger.js';
+import {AsmParserZ88dk} from './../parsers/asm-parser-z88dk.js';
 import * as utils from '../utils';
 
 export class z88dkCompiler extends BaseCompiler {

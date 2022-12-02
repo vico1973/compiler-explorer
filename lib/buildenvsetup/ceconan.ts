@@ -30,7 +30,7 @@ import request from 'request';
 import tar from 'tar-stream';
 import _ from 'underscore';
 
-import {logger} from '../logger';
+import {logger} from './../logger.js';
 
 import {BuildEnvSetupBase} from './base';
 import {BuildEnvDownloadInfo} from './buildenv.interfaces';

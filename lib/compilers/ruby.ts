@@ -27,7 +27,7 @@ import path from 'path';
 import {BaseCompiler} from '../base-compiler';
 import {resolvePathFromAppRoot} from '../utils';
 
-import {BaseParser} from './argument-parsers';
+import {BaseParser} from './argument-parsers.js';
 
 export class RubyCompiler extends BaseCompiler {
     disasmScriptPath: any;

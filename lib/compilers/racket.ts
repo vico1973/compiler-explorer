@@ -27,7 +27,7 @@ import path from 'path';
 import {CompilationResult, ExecutionOptions} from '../../types/compilation/compilation.interfaces';
 import {ParseFiltersAndOutputOptions} from '../../types/features/filters.interfaces';
 import {BaseCompiler} from '../base-compiler';
-import {logger} from '../logger';
+import {logger} from './../logger.js';
 
 export class RacketCompiler extends BaseCompiler {
     private raco: string;

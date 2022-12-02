@@ -27,7 +27,7 @@ import path from 'path';
 import fs from 'fs-extra';
 import _ from 'underscore';
 
-import {logger} from '../logger';
+import {logger} from './../logger.js';
 import * as utils from '../utils';
 
 import {BuildEnvDownloadInfo} from './buildenv.interfaces';

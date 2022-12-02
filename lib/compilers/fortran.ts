@@ -25,14 +25,15 @@
 import path from 'path';
 
 import {BaseCompiler} from '../base-compiler';
-import * as utils from '../utils';
+import * as utils from '../utils.js';
+import {CompilationResult} from '../../types/compilation/compilation.interfaces';
 
 export class FortranCompiler extends BaseCompiler {
     static get key() {
         return 'fortran';
     }
 
-    async runCompiler(compiler, options, inputFilename, execOptions) {
+    override async runCompiler(compiler, options, inputFilename, execOptions): Promise<CompilationResult> {
         if (!execOptions) {
             execOptions = this.getDefaultExecOptions();
         }

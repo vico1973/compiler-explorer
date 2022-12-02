@@ -25,7 +25,7 @@
 import {Counter} from 'prom-client';
 
 import {CacheableValue, GetResult} from '../../types/cache.interfaces';
-import {logger} from '../logger';
+import {logger} from './../logger.js';
 import {getHash} from '../utils';
 
 import {Cache, CacheStats} from './base.interfaces';

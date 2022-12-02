@@ -23,7 +23,7 @@
 // POSSIBILITY OF SUCH DAMAGE.
 
 import {AssemblyInstructionInfo, BaseAssemblyDocumentationProvider} from './base';
-import {getAsmOpcode} from './generated/asm-docs-evm';
+import {getAsmOpcode} from './generated/asm-docs-evm.js';
 
 export class EvmDocumentationProvider extends BaseAssemblyDocumentationProvider {
     public static get key() {

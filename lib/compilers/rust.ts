@@ -32,7 +32,7 @@ import {BaseCompiler} from '../base-compiler';
 import {BuildEnvDownloadInfo} from '../buildenvsetup/buildenv.interfaces';
 import {parseRustOutput} from '../utils';
 
-import {RustParser} from './argument-parsers';
+import {RustParser} from './argument-parsers.js';
 
 export class RustCompiler extends BaseCompiler {
     linker: string;

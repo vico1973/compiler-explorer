@@ -27,7 +27,7 @@ import path from 'path';
 import _ from 'underscore';
 
 import {BaseCompiler} from '../base-compiler';
-import {logger} from '../logger';
+import {logger} from './../logger.js';
 import {SPIRVAsmParser} from '../parsers/asm-parser-spirv';
 import * as utils from '../utils';
 

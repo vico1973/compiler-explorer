@@ -23,7 +23,7 @@
 // POSSIBILITY OF SUCH DAMAGE.
 
 import {Keyable} from './keyed-type.interfaces';
-import {logger} from './logger';
+import {logger} from './logger.js';
 
 function makeKeyMap<T extends Keyable>(typeName: string, objects: Record<string, T>): Record<string, T> {
     const keyToNameMap: Record<string, string> = {};

@@ -28,7 +28,7 @@ import {ResultLine} from '../../types/resultline/resultline.interfaces';
 import {BaseCompiler} from '../base-compiler';
 import * as utils from '../utils';
 
-import {ClangParser} from './argument-parsers';
+import {ClangParser} from './argument-parsers.js';
 
 // Each arch has a list of jump instructions in
 // Go source src/cmd/asm/internal/arch.

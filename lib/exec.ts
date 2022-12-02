@@ -33,7 +33,7 @@ import _ from 'underscore';
 import {ExecutionOptions} from '../types/compilation/compilation.interfaces';
 import {FilenameTransformFunc, UnprocessedExecResult} from '../types/execution/execution.interfaces';
 
-import {logger} from './logger';
+import {logger} from './logger.js';
 import {propsFor} from './properties';
 
 type NsJailOptions = {

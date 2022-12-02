@@ -25,7 +25,7 @@
 import * as Sentry from '@sentry/node';
 
 import {GetResult} from '../../types/cache.interfaces';
-import {logger} from '../logger';
+import {logger} from './../logger.js';
 import {S3Bucket} from '../s3-handler';
 import {S3HandlerOptions} from '../s3-handler.interfaces';
 

@@ -23,7 +23,7 @@
 // POSSIBILITY OF SUCH DAMAGE.
 
 import {AssemblyInstructionInfo, BaseAssemblyDocumentationProvider} from './base';
-import {getAsmOpcode} from './generated/asm-docs-java';
+import {getAsmOpcode} from './generated/asm-docs-java.js';
 
 export class JavaDocumentationProvider extends BaseAssemblyDocumentationProvider {
     public static get key() {

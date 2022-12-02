@@ -24,12 +24,12 @@
 
 import {LLVMOptPipelineResults} from '../../types/compilation/llvm-opt-pipeline-output.interfaces';
 import {ResultLine} from '../../types/resultline/resultline.interfaces';
-import {logger} from '../logger';
+import {logger} from './../logger.js';
 import {SymbolStore} from '../symbol-store';
 import * as utils from '../utils';
 
-import {BaseDemangler} from './base';
-import {PrefixTree} from './prefix-tree';
+import {BaseDemangler} from './base.js';
+import {PrefixTree} from './prefix-tree.js';
 
 export class LLVMIRDemangler extends BaseDemangler {
     llvmSymbolRE = /@([\w$.]+)/gi;

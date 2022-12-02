@@ -27,7 +27,7 @@ import path from 'path';
 import {ParseFiltersAndOutputOptions} from '../../types/features/filters.interfaces';
 import {BaseCompiler} from '../base-compiler';
 
-import {ErlangParser} from './argument-parsers';
+import {ErlangParser} from './argument-parsers.js';
 
 export class ErlangCompiler extends BaseCompiler {
     static get key() {

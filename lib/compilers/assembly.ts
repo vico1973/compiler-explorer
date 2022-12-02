@@ -30,10 +30,10 @@ import _ from 'underscore';
 import {BuildResult} from '../../types/compilation/compilation.interfaces';
 import {ParseFiltersAndOutputOptions} from '../../types/features/filters.interfaces';
 import {BaseCompiler} from '../base-compiler';
-import {AsmRaw} from '../parsers/asm-raw';
+import {AsmRaw} from './../parsers/asm-raw.js';
 import {fileExists} from '../utils';
 
-import {BaseParser} from './argument-parsers';
+import {BaseParser} from './argument-parsers.js';
 
 export class AssemblyCompiler extends BaseCompiler {
     static get key() {

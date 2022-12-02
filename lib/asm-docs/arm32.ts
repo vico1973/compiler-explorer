@@ -23,7 +23,7 @@
 // POSSIBILITY OF SUCH DAMAGE.
 
 import {AssemblyInstructionInfo, BaseAssemblyDocumentationProvider} from './base';
-import {getAsmOpcode} from './generated/asm-docs-arm32';
+import {getAsmOpcode} from './generated/asm-docs-arm32.js';
 
 export class Arm32DocumentationProvider extends BaseAssemblyDocumentationProvider {
     private static readonly CONDITIONAL_INSTRUCTION_REGEXP =

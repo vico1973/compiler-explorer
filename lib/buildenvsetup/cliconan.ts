@@ -28,7 +28,7 @@ import fs from 'fs-extra';
 import _ from 'underscore';
 
 import * as exec from '../exec';
-import {logger} from '../logger';
+import {logger} from './../logger.js';
 
 import {BuildEnvSetupBase} from './base';
 import {BuildEnvDownloadInfo} from './buildenv.interfaces';

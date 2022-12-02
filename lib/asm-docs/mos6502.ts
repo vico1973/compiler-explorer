@@ -23,7 +23,7 @@
 // POSSIBILITY OF SUCH DAMAGE.
 
 import {AssemblyInstructionInfo, BaseAssemblyDocumentationProvider} from './base';
-import {getAsmOpcode} from './generated/asm-docs-6502';
+import {getAsmOpcode} from './generated/asm-docs-6502.js';
 
 export class Mos6502DocumentationProvider extends BaseAssemblyDocumentationProvider {
     public static get key() {

@@ -27,7 +27,7 @@ import path from 'path';
 import {ParseFiltersAndOutputOptions} from '../../types/features/filters.interfaces';
 import {BaseCompiler} from '../base-compiler';
 
-import {BaseParser} from './argument-parsers';
+import {BaseParser} from './argument-parsers.js';
 
 export class CIRCTCompiler extends BaseCompiler {
     static get key() {

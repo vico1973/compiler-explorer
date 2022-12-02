@@ -22,7 +22,7 @@
 // ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
 // POSSIBILITY OF SUCH DAMAGE.
 
-import {logger} from '../logger';
+import {logger} from './../logger.js';
 
 import {Cache} from './base.interfaces';
 import {InMemoryCache} from './in-memory';

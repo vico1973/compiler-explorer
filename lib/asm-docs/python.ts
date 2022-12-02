@@ -23,7 +23,7 @@
 // POSSIBILITY OF SUCH DAMAGE.
 
 import {AssemblyInstructionInfo, BaseAssemblyDocumentationProvider} from './base';
-import {getAsmOpcode} from './generated/asm-docs-python';
+import {getAsmOpcode} from './generated/asm-docs-python.js';
 
 export class PythonDocumentationProvider extends BaseAssemblyDocumentationProvider {
     public static get key() {

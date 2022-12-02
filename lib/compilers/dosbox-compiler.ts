@@ -28,8 +28,8 @@ import fs from 'fs-extra';
 
 import {BaseCompiler} from '../base-compiler';
 import * as exec from '../exec';
-import {logger} from '../logger';
-import {TurboCAsmParser} from '../parsers/asm-parser-turboc';
+import {logger} from './../logger.js';
+import {TurboCAsmParser} from './../parsers/asm-parser-turboc.js';
 
 export class DosboxCompiler extends BaseCompiler {
     private readonly dosbox: string;

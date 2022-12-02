@@ -68,7 +68,7 @@ lang-dart:
   - etc/config/dart.*.properties
 lang-fortran:
   - lib/compilers/flang.ts
-  - lib/compilers/fortran.js
+  - lib/compilers/fortran.ts
   - etc/config/fortran.*.properties
   - static/modes/fortran-mode.ts
 lang-hlsl:

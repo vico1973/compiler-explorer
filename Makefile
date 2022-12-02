@@ -74,16 +74,16 @@ clean:  ## Cleans up everything
 run: prereqs  ## Runs the site like it runs in production
 	$(NPM) run webpack
 	$(NPM) run ts-compile
-	env NODE_ENV=production $(NODE) $(NODE_ARGS) -r esm ./out/dist/app.js --webpackContent ./out/webpack/static $(EXTRA_ARGS)
+	env NODE_ENV=production $(NODE) $(NODE_ARGS) ./out/dist/app.js --webpackContent ./out/webpack/static $(EXTRA_ARGS)
 
 .PHONY: dev
 dev: prereqs ## Runs the site as a developer; including live reload support and installation of git hooks
-	./node_modules/.bin/supervisor -w app.js,lib,etc/config,static/tsconfig.json -e 'js|ts|node|properties|yaml' -n exit --exec $(NODE) $(NODE_ARGS) -- -r esm -r ts-node/register ./app.js $(EXTRA_ARGS)
+	./node_modules/.bin/supervisor -w app.js,lib,etc/config,static/tsconfig.json -e 'js|ts|node|properties|yaml' -n exit --exec $(NODE) $(NODE_ARGS) -- -r ts-node/register ./app.js $(EXTRA_ARGS)
 
 .PHONY: gpu-dev
 gpu-dev: prereqs ## Runs the site as a developer; including live reload support and installation of git hooks
-	./node_modules/.bin/supervisor -w app.js,lib,etc/config,static/tsconfig.json -e 'js|ts|node|properties|yaml' -n exit --exec $(NODE) $(NODE_ARGS) -- -r esm -r ts-node/register ./app.js --env gpu $(EXTRA_ARGS)
+	./node_modules/.bin/supervisor -w app.js,lib,etc/config,static/tsconfig.json -e 'js|ts|node|properties|yaml' -n exit --exec $(NODE) $(NODE_ARGS) -- -r ts-node/register ./app.js --env gpu $(EXTRA_ARGS)
 
 .PHONY: debug
 debug: prereqs ## Runs the site as a developer with full debugging; including live reload support and installation of git hooks
-	./node_modules/.bin/supervisor -w app.js,lib,etc/config,static/tsconfig.json -e 'js|ts|node|properties|yaml' -n exit --inspect 9229 --exec $(NODE) $(NODE_ARGS) -- -r esm -r ts-node/register ./app.js --debug $(EXTRA_ARGS)
+	./node_modules/.bin/supervisor -w app.js,lib,etc/config,static/tsconfig.json -e 'js|ts|node|properties|yaml' -n exit --inspect 9229 --exec $(NODE) $(NODE_ARGS) -- -r ts-node/register ./app.js --debug $(EXTRA_ARGS)

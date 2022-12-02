@@ -32,7 +32,7 @@ import {UnprocessedExecResult} from '../../types/execution/execution.interfaces'
 import {Library, SelectedLibraryVersion} from '../../types/libraries/libraries.interfaces';
 import {ResultLine} from '../../types/resultline/resultline.interfaces';
 import * as exec from '../exec';
-import {logger} from '../logger';
+import {logger} from './../logger.js';
 import {parseOutput} from '../utils';
 
 import {Tool, ToolEnv, ToolInfo, ToolResult, ToolTypeKey} from './base-tool.interface';

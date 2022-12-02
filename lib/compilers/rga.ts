@@ -30,7 +30,7 @@ import {CompilationResult, ExecutionOptions} from '../../types/compilation/compi
 import {ParseFiltersAndOutputOptions} from '../../types/features/filters.interfaces';
 import {BaseCompiler} from '../base-compiler';
 import * as exec from '../exec';
-import {logger} from '../logger';
+import {logger} from './../logger.js';
 
 interface ASICSelection {
     asic?: string;
